@@ -333,6 +333,12 @@ function _init() {
             $("body").addClass('sidebar-open').trigger('expanded.pushMenu');
           }
         }
+        
+        //@Guson 2016
+        setTimeout(function(){
+          $(window).resize();
+        }, 300);
+        
       });
 
       $(".content-wrapper").click(function () {
@@ -440,7 +446,7 @@ function _init() {
    */
   $.AdminLTE.controlSidebar = {
     //instantiate the object
-    activate: function () {
+    activate: function (openCallback) {
       //Get the object
       var _this = this;
       //Update options
@@ -456,6 +462,12 @@ function _init() {
         //If the sidebar is not open
         if (!sidebar.hasClass('control-sidebar-open')
             && !$('body').hasClass('control-sidebar-open')) {
+          
+          //@Guson 2016
+          if(openCallback){
+            openCallback();
+          }    
+              
           //Open the sidebar
           _this.open(sidebar, o.slide);
         } else {
